@@ -33,6 +33,18 @@ header h1 {
   box-shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
 
+/* Histórico */
+.history {
+  background: #0f172a;
+  color: #94a3b8;
+  font-size: 1rem;
+  text-align: right;
+  padding: 10px 20px;
+  min-height: 24px;
+  border-bottom: 1px solid #334155;
+}
+
+/* Display */
 .display {
   background: #0f172a;
   color: #38bdf8;

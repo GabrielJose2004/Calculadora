@@ -1,4 +1,5 @@
 let display = document.getElementById("display");
+let history = document.getElementById("history");
 let expressao = "";
 
 // Adicionar número
@@ -23,7 +24,9 @@ function adicionarOperacao(op) {
 // Calcular resultado
 function calcular() {
   try {
-    expressao = eval(expressao).toString();
+    let resultado = eval(expressao).toString();
+    history.textContent = expressao + " = " + resultado; // histórico
+    expressao = resultado;
   } catch {
     expressao = "Erro";
   }
@@ -34,6 +37,7 @@ function calcular() {
 function limpar() {
   expressao = "";
   atualizarDisplay();
+  history.textContent = "";
 }
 
 // Apagar último
@@ -46,3 +50,24 @@ function apagar() {
 function atualizarDisplay() {
   display.textContent = expressao || "0";
 }
+
+// -------------------------
+// Suporte ao teclado 🎹
+// -------------------------
+document.addEventListener("keydown", (event) => {
+  const key = event.key;
+
+  if (!isNaN(key)) {
+    adicionarNumero(key); // números
+  } else if ("+-*/".includes(key)) {
+    adicionarOperacao(key); // operações
+  } else if (key === "Enter" || key === "=") {
+    calcular(); // resultado
+  } else if (key === "Backspace") {
+    apagar(); // apagar último
+  } else if (key === "Escape") {
+    limpar(); // limpar tudo
+  } else if (key === ".") {
+    adicionarNumero("."); // ponto decimal
+  }
+});
